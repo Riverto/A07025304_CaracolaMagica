@@ -26,7 +26,9 @@ public class MainGame : MonoBehaviour {
     string[] answers = { "Si", "No", "Talvez" };
 
     //This variable stores the number of questions we have been asked
+    //and the value to trigger the EE
     int timesAsked;
+    int trigger = 10;
 
     //This variable will be used for our EE
     bool hasDisappeard;
@@ -70,7 +72,7 @@ public class MainGame : MonoBehaviour {
     {
         //Because we want the EasterEgg to be accesible from anywhere
         //We check its activation before anything
-        if(timesAsked > 10 && !hasDisappeard)
+        if(timesAsked > trigger && !hasDisappeard)
         {
             hasDisappeard = true;
             currentState = GameState.EasterEgg;
@@ -118,7 +120,12 @@ public class MainGame : MonoBehaviour {
                 timesAsked++;
                 giveRandomAnswer();
                 Terminal.WriteLine(againHint);
-            } else
+            } else if (input == "help")
+            {
+                Terminal.WriteLine("(You called for help.)");
+                Terminal.WriteLine("But nobody came.");
+            }
+            else
             {
                 Terminal.WriteLine("No hay nada para escucharte.");
             }
